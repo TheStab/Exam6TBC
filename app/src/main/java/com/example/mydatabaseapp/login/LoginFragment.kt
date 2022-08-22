@@ -44,7 +44,7 @@ class LoginFragment : Fragment() {
 
         binding.lifecycleOwner = this
 
-        loginViewModel.navigatetoRegister.observe(this, Observer { hasFinished->
+        loginViewModel.navigatetoRegister.observe(viewLifecycleOwner, Observer { hasFinished->
             if (hasFinished == true){
                 Log.i("MYTAG","insidi observe")
                 displayUsersList()
@@ -52,28 +52,28 @@ class LoginFragment : Fragment() {
             }
         })
 
-        loginViewModel.errotoast.observe(this, Observer { hasError->
+        loginViewModel.errotoast.observe(viewLifecycleOwner, Observer { hasError->
             if(hasError==true){
                 Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
                 loginViewModel.donetoast()
             }
         })
 
-        loginViewModel.errotoastUsername .observe(this, Observer { hasError->
+        loginViewModel.errotoastUsername .observe(viewLifecycleOwner, Observer { hasError->
             if(hasError==true){
                 Toast.makeText(requireContext(), "User doesnt exist,please Register!", Toast.LENGTH_SHORT).show()
                 loginViewModel.donetoastErrorUsername()
             }
         })
 
-        loginViewModel.errorToastInvalidPassword.observe(this, Observer { hasError->
+        loginViewModel.errorToastInvalidPassword.observe(viewLifecycleOwner, Observer { hasError->
             if(hasError==true){
                 Toast.makeText(requireContext(), "Please check your Password", Toast.LENGTH_SHORT).show()
                 loginViewModel.donetoastInvalidPassword()
             }
         })
 
-        loginViewModel.navigatetoUserDetails.observe(this, Observer { hasFinished->
+        loginViewModel.navigatetoUserDetails.observe(viewLifecycleOwner, Observer { hasFinished->
             if (hasFinished == true){
                 Log.i("MYTAG","insidi observe")
                 navigateUserDetails()

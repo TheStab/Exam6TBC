@@ -49,7 +49,7 @@ class RegisterFragment : Fragment() {
 
         binding.lifecycleOwner = this
         
-        registerViewModel.navigateto.observe(this, Observer { hasFinished->
+        registerViewModel.navigateto.observe(viewLifecycleOwner, Observer { hasFinished->
             if (hasFinished == true){
                 Log.i("MYTAG","insidi observe")
                 displayUsersList()
@@ -57,19 +57,19 @@ class RegisterFragment : Fragment() {
             }
         })
 
-        registerViewModel.userDetailsLiveData.observe(this, Observer {
+        registerViewModel.userDetailsLiveData.observe(viewLifecycleOwner, Observer {
             Log.i("MYTAG",it.toString()+"000000000000000000000000")
         })
 
 
-        registerViewModel.errotoast.observe(this, Observer { hasError->
+        registerViewModel.errotoast.observe(viewLifecycleOwner, Observer { hasError->
             if(hasError==true){
                 Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
                 registerViewModel.donetoast()
             }
         })
 
-        registerViewModel.errotoastUsername.observe(this, Observer { hasError->
+        registerViewModel.errotoastUsername.observe(viewLifecycleOwner, Observer { hasError->
             if(hasError==true){
                 Toast.makeText(requireContext(), "UserName Already taken", Toast.LENGTH_SHORT).show()
                 registerViewModel.donetoastUserName()
